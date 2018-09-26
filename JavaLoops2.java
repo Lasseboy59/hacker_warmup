@@ -15,12 +15,12 @@ class JavaLoops2 {
             int b = in.nextInt();
             int n = in.nextInt();
 
-            System.out.print(a + " ");
-            System.out.print("");
-            System.out.print(b + " ");
-            System.out.print("");
-            System.out.print(n + " ");
-            System.out.println("");
+//            System.out.print(a + " ");
+//            System.out.print("");
+//            System.out.print(b + " ");
+//            System.out.print("");
+//            System.out.print(n + " ");
+//            System.out.println("");
 
             list.add(a);
             list.add(b);
@@ -29,26 +29,21 @@ class JavaLoops2 {
         }
         in.close();
 
-        int firstNum = 0, countedNumber = 0;
-        int b = list.get(1);
-//        System.out.println("size: " + list.size());
-//        System.out.println("how many: " + list.get(2));
-//        System.out.println("b : " + b);
-        firstNum = list.get(0);
-        
+//        System.out.println("list: " + list.toString());
 
-        for (int j = 0, sum = list.get(0); j < list.get(2); j++) {
-           
-//            System.out.println(j + " list: ");
-//            System.out.println("counted number = " + b + " ^ " + j);
-            countedNumber = (int) Math.pow(b, j)* b;
-
-//            System.out.println("countedNumber: " + countedNumber);
-            sum += countedNumber;
-            System.out.println(sum + " ");
+        for (int i = 0, k = 0; i < t; i++) {
+            
+//            System.out.println("lakenta: " + i);
+            
+            for (int j = 0, countedNumber = 0, sum = list.get(i + k), b = list.get(i + (k+1)); j < list.get(i + (k+2)); j++) {
+                countedNumber = (int) Math.pow(2, j) * b;
+                sum += countedNumber;
+                System.out.print(sum + " ");
+            }
+            System.out.println("");
+            k += 2;
 
         }
-        System.out.println("");
 
     }
 }

@@ -15,28 +15,53 @@ import java.util.regex.*;
 
 public class MinimumSwaps {
 
+// https://stackoverflow.com/questions/5785745/make-copy-of-array
+// https://www.google.fi/search?q=minimum+swaps+to+sort+array+in+ascending+order&oq=minimum+swaps+in+array&aqs=chrome.3.69i57j69i60l2j0.24191j0j7&sourceid=chrome&ie=UTF-8
     // Complete the minimumSwaps function below.
     static int minimumSwaps(int[] arr) {
-        
+
         for (int i = 0; i < arr.length; i++) {
             System.out.print(arr[i] + " ");
         }
         System.out.println("\n----------------");
-//        https://stackoverflow.com/questions/5785745/make-copy-of-array
 
         int min = 0;
-        int[] dest = new int[arr.length];
-        System.arraycopy( arr, 0, dest, 0, arr.length );
-        Arrays.sort(dest);
+        int[] copy = new int[arr.length];
+        System.arraycopy(arr, 0, copy, 0, arr.length);
+        Arrays.sort(copy);
 
         for (int i = 0; i < arr.length; i++) {
-            System.out.print(dest[i] + " ");
-            
+            System.out.print(copy[i] + " ");
         }
 
+        System.out.println("\na[0}: " + find(arr, copy[0]));
+        System.out.println("\na[0}: " + find(arr, 1));
 
         System.out.println("");
+        
+        
+        
+        
         return -1;
+    }
+
+    private static int find(int[] a, int target) {
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] == target) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static int getNextValue(int[] numbers, int biggerThanThis) {
+        int maxValue = biggerThanThis;
+        for (int i = 1; i < numbers.length; i++) {
+            if (numbers[i] == (maxValue + 1)) {
+                maxValue = numbers[i];
+            }
+        }
+        return maxValue;
     }
 
     private static final Scanner scanner = new Scanner(System.in);

@@ -8,25 +8,25 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.regex.*;
 
-public class MinimumSwaps3 {
+public class MinimumSwaps4 {
 
     static int minimumSwaps(int[] arr) {
 
-        int minValue = 0;
-        boolean checked = false;
-        int smallest = 0, index = 0, nextNumber = 0, targetIndex = 0;
+        int minValue = 0,targetIndex = 0, swaps = 0;
 
         for (int i = 0; i < arr.length; i++) {
-            minValue = getMinValue(arr, i);
-            targetIndex = findIndex(arr, minValue, i);
-            System.out.println("round: " + i + " target index: " + targetIndex + " min value: " + minValue);
-            if (arr[0] != minValue && !checked) {
-                swap(arr, 0, targetIndex);
-                checked = true;
-            } else if(arr[i] != minValue){
-                
-            }
 
+            if (arr[i] == getMinValue(arr, i)) {
+                System.out.println("no swaps round: " + i);
+                System.out.println("min: " + getMinValue(arr, i));
+            } else {
+                System.out.println("swaps at round: " + i);
+                minValue = getMinValue(arr, i);
+                targetIndex = findIndex(arr, minValue);
+                System.out.println("minValue: " + minValue + " index: " + targetIndex);
+                swap(arr, i, targetIndex);
+                swaps++;
+            }
         }
 
         System.out.println("");
@@ -34,8 +34,8 @@ public class MinimumSwaps3 {
             System.out.print(arr[i] + " ");
         }
 
-        System.out.println("");
-        return -1;
+        System.out.println("swaps: " + swaps);
+        return swaps;
     }
 
     private static void swap(int[] arr, int begin, int end) {
@@ -54,32 +54,6 @@ public class MinimumSwaps3 {
         System.out.println("\n------- in swap ------------");
     }
 
-    private static void swap(int[] arr, int fromZeroIndex, int smaller, int toSwap) {
-        System.out.println("\n-------in swap 1 -----------");
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }
-        System.out.println("\n------- in swap 1------------");
-        int temp = arr[smaller];
-        arr[smaller] = arr[toSwap];
-        arr[toSwap] = temp;
-
-        System.out.println("\n-------in swap 2 -----------");
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }
-        System.out.println("\n------- in swap 2------------");
-    }
-
-    private static int getMinValue(int[] numbers) {
-        int minValue = numbers[0];
-        for (int i = 1; i < numbers.length; i++) {
-            if (numbers[i] < minValue) {
-                minValue = numbers[i];
-            }
-        }
-        return minValue;
-    }
 
     private static int getMinValue(int[] numbers, int min) {
         System.out.println("\n------- min --------------");
@@ -106,26 +80,6 @@ public class MinimumSwaps3 {
         return -1;
     }
 
-    private static int findIndex(int[] a, int target, int counter) {
-        System.out.println("\n--- findIndex---- counter: " + counter + " \n-----");
-        for (int i = counter; i < a.length; i++) {
-            if (a[i] == target) {
-                System.out.println("\n--- findIndex---- ret index : " + (i - counter) + " \n-----");
-                return i - counter;
-            }
-        }
-        return -1;
-    }
-
-    private static int getNextValue(int[] numbers, int biggerThanThis) {
-        int maxValue = biggerThanThis;
-        for (int i = 1; i < numbers.length; i++) {
-            if (numbers[i] == (maxValue + 1)) {
-                maxValue = numbers[i];
-            }
-        }
-        return maxValue;
-    }
 
     private static final Scanner scanner = new Scanner(System.in);
 

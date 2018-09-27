@@ -8,6 +8,10 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.regex.*;
 
+// https://stackoverflow.com/questions/5785745/make-copy-of-array
+// https://www.google.fi/search?q=minimum+swaps+to+sort+array+in+ascending+order&oq=minimum+swaps+in+array&aqs=chrome.3.69i57j69i60l2j0.24191j0j7&sourceid=chrome&ie=UTF-8
+
+
 public class MinimumSwaps3 {
 
     static int minimumSwaps(int[] arr) {

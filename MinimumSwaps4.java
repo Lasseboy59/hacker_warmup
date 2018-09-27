@@ -8,6 +8,10 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.regex.*;
 
+// https://stackoverflow.com/questions/5785745/make-copy-of-array
+// https://www.google.fi/search?q=minimum+swaps+to+sort+array+in+ascending+order&oq=minimum+swaps+in+array&aqs=chrome.3.69i57j69i60l2j0.24191j0j7&sourceid=chrome&ie=UTF-8
+
+
 public class MinimumSwaps4 {
 
     static int minimumSwaps(int[] arr) {
@@ -17,13 +21,13 @@ public class MinimumSwaps4 {
         for (int i = 0; i < arr.length; i++) {
 
             if (arr[i] == getMinValue(arr, i)) {
-                System.out.println("no swaps round: " + i);
-                System.out.println("min: " + getMinValue(arr, i));
+//                System.out.println("no swaps round: " + i);
+//                System.out.println("min: " + getMinValue(arr, i));
             } else {
-                System.out.println("swaps at round: " + i);
+//                System.out.println("swaps at round: " + i);
                 minValue = getMinValue(arr, i);
                 targetIndex = findIndex(arr, minValue);
-                System.out.println("minValue: " + minValue + " index: " + targetIndex);
+//                System.out.println("minValue: " + minValue + " index: " + targetIndex);
                 swap(arr, i, targetIndex);
                 swaps++;
             }
@@ -34,40 +38,40 @@ public class MinimumSwaps4 {
             System.out.print(arr[i] + " ");
         }
 
-        System.out.println("swaps: " + swaps);
+//        System.out.println("swaps: " + swaps);
         return swaps;
     }
 
     private static void swap(int[] arr, int begin, int end) {
-        System.out.println("\n-------in swap 1 -----------");
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }
-        System.out.println("");
+//        System.out.println("\n-------in swap 1 -----------");
+//        for (int i = 0; i < arr.length; i++) {
+//            System.out.print(arr[i] + " ");
+//        }
+//        System.out.println("");
         int temp = arr[begin];
         arr[begin] = arr[end];
         arr[end] = temp;
 
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }
-        System.out.println("\n------- in swap ------------");
+//        for (int i = 0; i < arr.length; i++) {
+//            System.out.print(arr[i] + " ");
+//        }
+//        System.out.println("\n------- in swap ------------");
     }
 
 
     private static int getMinValue(int[] numbers, int min) {
-        System.out.println("\n------- min --------------");
-        for (int i = min; i < numbers.length; i++) {
-            System.out.print(numbers[i] + " ");
-        }
-        System.out.println("\n-------- min -------------");
+//        System.out.println("\n------- min --------------");
+//        for (int i = min; i < numbers.length; i++) {
+//            System.out.print(numbers[i] + " ");
+//        }
+//        System.out.println("\n-------- min -------------");
         int minValue = numbers[min];
         for (int i = 1 + min; i < numbers.length; i++) {
             if (numbers[i] < minValue) {
                 minValue = numbers[i];
             }
         }
-        System.out.println("min: " + minValue);
+//        System.out.println("min: " + minValue);
         return minValue;
     }
 

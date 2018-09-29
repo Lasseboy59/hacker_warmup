@@ -16,9 +16,9 @@ public class MinimumSwaps6 {
 
         int minValue = 0, targetIndex = 0, swaps = 0;
         
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }
+//        for (int i = 0; i < arr.length; i++) {
+//            System.out.print(arr[i] + " ");
+//        }
 
         for (int i = 0; i < arr.length; i++) {
 
@@ -35,10 +35,10 @@ public class MinimumSwaps6 {
             }
         }
 
-        System.out.println("");
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }
+//        System.out.println("");
+//        for (int i = 0; i < arr.length; i++) {
+//            System.out.print(arr[i] + " ");
+//        }
 
         System.out.println("swaps: " + swaps);
         return swaps;
@@ -92,7 +92,7 @@ public class MinimumSwaps6 {
         int[] arr = new int[n];
 
         for (int i = 0; hSet.size() < n; i++) {
-            int number = (int) (Math.random() * 1000);
+            int number = (int) (Math.random() * 100000);
             if (number == 0) {
                 number += 1;
             }

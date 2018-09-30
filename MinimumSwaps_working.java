@@ -7,52 +7,57 @@ import java.text.*;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.regex.*;
+import java.util.stream.Collectors;
+import static jdk.nashorn.internal.objects.NativeArray.map;
 
 // https://stackoverflow.com/questions/5785745/make-copy-of-array
 // https://www.google.fi/search?q=minimum+swaps+to+sort+array+in+ascending+order&oq=minimum+swaps+in+array&aqs=chrome.3.69i57j69i60l2j0.24191j0j7&sourceid=chrome&ie=UTF-8
-
-public class MinimumSwaps3 {
+//https://www.mkyong.com/java/how-do-convert-array-to-list-in-java/
+//https://stackoverflow.com/questions/157944/create-arraylist-from-array
+public class MinimumSwaps_working {
 
     static int minimumSwaps(int[] arr) {
+        int arrLen = arr.length;
+        int count = 0;
+        int[] sarr = arr.clone();
+        Arrays.sort(sarr);
 
-        int minValue = 0, targetIndex = 0, swaps = 0;
-
-        for (int i = 0; i < arr.length; i++) {
-
-            if (arr[i] == getMinValue(arr, i)) {
-            } else {
-                minValue = getMinValue(arr, i);
-                targetIndex = findIndex(arr, minValue);
-                swap(arr, i, targetIndex);
-                swaps++;
+        for (int i = 0; i < arrLen; i++) {
+            if (arr[i] != sarr[i]) {
+                count++;
+                for (int j = i + 1; j < arrLen; j++) {
+                    if (arr[j] == sarr[i]) {
+                        int tmp = arr[j];
+                        arr[j] = arr[i];
+                        arr[i] = tmp;
+                        break;
+                    }
+                }
             }
         }
-        return swaps;
+        return count;
+        // secs: 0.013660817
     }
+    
+    private static int minimumSwapsb(int[] arr) {
 
-    private static void swap(int[] arr, int begin, int end) {
-        int temp = arr[begin];
-        arr[begin] = arr[end];
-        arr[end] = temp;
-    }
+        int count = 0;
 
-    private static int getMinValue(int[] numbers, int min) {
-        int minValue = numbers[min];
-        for (int i = 1 + min; i < numbers.length; i++) {
-            if (numbers[i] < minValue) {
-                minValue = numbers[i];
+        for (int i = 0; i < arr.length; /*i++*/) {
+            if (arr[i] == (i + 1) || arr[i] >= arr.length) {
+                i++;
+                continue;
             }
-        }
-        return minValue;
-    }
 
-    private static int findIndex(int[] a, int target) {
-        for (int i = 0; i < a.length; i++) {
-            if (a[i] == target) {
-                return i;
-            }
+            int tmp = arr[i];
+            arr[i] = arr[tmp - 1];
+            arr[tmp - 1] = tmp;
+
+            count++;
         }
-        return -1;
+
+        return count;
+        // secs: 0.002736805
     }
 
     private static int[] generateRandomArray(int n) {

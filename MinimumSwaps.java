@@ -39,9 +39,6 @@ public class MinimumSwaps {
 
         System.out.println("");
         
-        
-        
-        
         return -1;
     }
 

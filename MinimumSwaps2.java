@@ -8,83 +8,75 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.regex.*;
 
-public class MinimumSwaps2 {
-
 // https://stackoverflow.com/questions/5785745/make-copy-of-array
 // https://www.google.fi/search?q=minimum+swaps+to+sort+array+in+ascending+order&oq=minimum+swaps+in+array&aqs=chrome.3.69i57j69i60l2j0.24191j0j7&sourceid=chrome&ie=UTF-8
-    // Complete the minimumSwaps function below.
+public class MinimumSwaps2 {
+
     static int minimumSwaps(int[] arr) {
 
-        int minValue = 0;
-        int smallest = getMinValue(arr, minValue), index = 0, nextNumber = 0;
+        int minValue = 0, targetIndex = 0, swaps = 0;
+        
+//        for (int i = 0; i < arr.length; i++) {
+//            System.out.print(arr[i] + " ");
+//        }
 
         for (int i = 0; i < arr.length; i++) {
 
-//            if (arr[i] == getMinValue(arr, i)) {
-                System.out.println("fine a[" +i+ "] = " + getMinValue(arr, i));
-//                i++;
-//            } 
-//            else if (arr[i] != getMinValue(arr, i)) {
-//                System.out.println("");
-//                index = find(arr, getMinValue(arr, i));
-//                nextNumber = getNextValue(arr, getMinValue(arr, i));
-//                System.out.println("swap " + arr[index] + " with: " + arr[i]);
-//                swap(arr, i, index, 0);
-//            } else if (arr[i] == getMinValue(arr, i)) {
-//
-//            }
-
-        }
-
-        System.out.println("");
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }
-
-        System.out.println("");
-        return -1;
-    }
-
-    private static void swap(int[] arr, int fromZeroIndex, int smaller, int toSwap) {
-        System.out.println("\n-------in swap 1 -----------");
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }
-        System.out.println("\n------- in swap 1------------");
-        int temp = arr[smaller];
-        arr[smaller] = arr[toSwap];
-        arr[toSwap] = temp;
-
-        System.out.println("\n-------in swap 2 -----------");
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }
-        System.out.println("\n------- in swap 2------------");
-    }
-
-    private static int getMinValue(int[] numbers) {
-        int minValue = numbers[0];
-        for (int i = 1; i < numbers.length; i++) {
-            if (numbers[i] < minValue) {
-                minValue = numbers[i];
+            if (arr[i] == getMinValue(arr, i)) {
+//                System.out.println("no swaps round: " + i);
+//                System.out.println("min: " + getMinValue(arr, i));
+            } else {
+//                System.out.println("swaps at round: " + i);
+                minValue = getMinValue(arr, i);
+                targetIndex = findIndex(arr, minValue);
+//                System.out.println("minValue: " + minValue + " index: " + targetIndex);
+                swap(arr, i, targetIndex);
+                swaps++;
             }
         }
-        return minValue;
+
+//        System.out.println("");
+//        for (int i = 0; i < arr.length; i++) {
+//            System.out.print(arr[i] + " ");
+//        }
+
+//        System.out.println("swaps: " + swaps);
+        return swaps;
+    }
+
+    private static void swap(int[] arr, int begin, int end) {
+//        System.out.println("\n-------in swap 1 -----------");
+//        for (int i = 0; i < arr.length; i++) {
+//            System.out.print(arr[i] + " ");
+//        }
+//        System.out.println("");
+        int temp = arr[begin];
+        arr[begin] = arr[end];
+        arr[end] = temp;
+
+//        for (int i = 0; i < arr.length; i++) {
+//            System.out.print(arr[i] + " ");
+//        }
+//        System.out.println("\n------- in swap ------------");
     }
 
     private static int getMinValue(int[] numbers, int min) {
+//        System.out.println("\n------- min --------------");
+//        for (int i = min; i < numbers.length; i++) {
+//            System.out.print(numbers[i] + " ");
+//        }
+//        System.out.println("\n-------- min -------------");
         int minValue = numbers[min];
-        for (int i = 1; i < numbers.length; i++) {
+        for (int i = 1 + min; i < numbers.length; i++) {
             if (numbers[i] < minValue) {
                 minValue = numbers[i];
             }
         }
-        
-        
+//        System.out.println("min: " + minValue);
         return minValue;
     }
 
-    private static int find(int[] a, int target) {
+    private static int findIndex(int[] a, int target) {
         for (int i = 0; i < a.length; i++) {
             if (a[i] == target) {
                 return i;
@@ -93,14 +85,30 @@ public class MinimumSwaps2 {
         return -1;
     }
 
-    private static int getNextValue(int[] numbers, int biggerThanThis) {
-        int maxValue = biggerThanThis;
-        for (int i = 1; i < numbers.length; i++) {
-            if (numbers[i] == (maxValue + 1)) {
-                maxValue = numbers[i];
+    private static int[] generateRandomArray(int n) {
+        HashSet<Integer> hSet = new HashSet<>();
+//        System.out.println("Size of HashSet : " + hSet.size());
+
+        int[] arr = new int[n];
+
+        for (int i = 0; hSet.size() < n; i++) {
+            int number = (int) (Math.random() * 100010);
+            if (number == 0) {
+                number += 1;
             }
+            hSet.add(number);
+
         }
-        return maxValue;
+
+        int j = 0;
+        for (Integer numInt : hSet) {
+            arr[j] = numInt;
+            j++;
+        }
+//        System.out.println("\n");
+//        System.out.println("Size of HashSet after addition : " + hSet.size());
+
+        return arr;
     }
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -109,18 +117,13 @@ public class MinimumSwaps2 {
         final String FNAME = "c:\\temp\\minimumSwaps.log";
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FNAME));
 
-        int n = scanner.nextInt();
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+        System.out.print("Give the length of array: ");
+        int arrayLenght = Integer.parseInt(scanner.nextLine());
+        int[] arr = new int[arrayLenght];
 
-        int[] arr = new int[n];
+        arr = generateRandomArray(arrayLenght);
 
-        String[] arrItems = scanner.nextLine().split(" ");
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
-        for (int i = 0; i < n; i++) {
-            int arrItem = Integer.parseInt(arrItems[i]);
-            arr[i] = arrItem;
-        }
+        System.out.println("--------------------------------");
 
         int res = minimumSwaps(arr);
 

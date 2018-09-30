@@ -105,6 +105,8 @@ public class MinimumBribes {
         System.out.println(count);
     }
 
+//    https://www.tutorialspoint.com/java/lang/math_max_int.htm
+    
     static void minimumBribes(int[] q) {
         int count = 0;
         boolean isChaotic = false;
